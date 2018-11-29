@@ -11,9 +11,9 @@ void PIDChassis(double dist){
     RightChassis.resetRotation();
     LeftChassis.resetRotation();
     
-    double goal = (180*dist)/(2*M_PI);
+    double goal = (180*dist)/(2*M_PI); //the goal is the place or area where we want the bot to reach. 
     
-    double pGain = 30.0;
+    double pGain = 30.0; //this value is toyed with to find critical gain, which is the point at where the bot never reaches its target, and oscilates forever
     double iGain = 0.0;
     double dGain = 0.0;
     
@@ -45,7 +45,7 @@ void PIDChassis(double dist){
         
         oldError = avgError;
         
-        if(oldSpeed >= 0.0 && motorSpeed < 0.0 && isFirst == true){
+        if(oldSpeed >= 0.0 && motorSpeed < 0.0 && isFirst == true){ //this code gives us the values we use to display the timer and find the values the brain displays
             isFirst = false;
             oldSpeed = motorSpeed;
             Timer.clear();
@@ -60,7 +60,7 @@ void PIDChassis(double dist){
         else{
             oldSpeed = motorSpeed;
             continue;
-        }
+        } 
 
         if(counter % 2 == 0 && counter > 1){
             double currentTime = Timer.time(vex::timeUnits::msec);
@@ -72,9 +72,9 @@ void PIDChassis(double dist){
         i++;
     }
     
-    LeftChassis.stop(vex::brakeType::brake);
+    LeftChassis.stop(vex::brakeType::brake); //the bot stops once it reaches its target
     RightChassis.stop(vex::brakeType::brake);
     
-    RightChassis.resetRotation();
+    RightChassis.resetRotation(); //this resets the encoder values of the motors to zero
     LeftChassis.resetRotation();
 }
