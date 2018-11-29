@@ -5,7 +5,7 @@ void GyroTurnRight(double deg){
     double org = gyroVal;
     double current = gyroVal - org;
 
-    double goal = deg + org;
+    double goal = deg + org; //the goal is the target that the bot has to reach
     
     double pGain = 0.7;
     double iGain = 0.55;
@@ -52,7 +52,7 @@ void GyroTurnRight(double deg){
         
         oldError = error;
         
-        
+        //TIMER CODE
         if(oldSpeed >= 0.0 && motorSpeed < 0.0 && isFirst == true){
             isFirst = false;
             oldSpeed = motorSpeed;
@@ -70,7 +70,7 @@ void GyroTurnRight(double deg){
             continue;
         }
            
-        if(counter % 2 == 0 && counter > 1){
+        if(counter % 2 == 0 && counter > 1){ //this prints values that are used to find the correct pGain, iGain, and dGain values.
             double currentTime = (Brain.timer(vex::timeUnits::sec));
             int row = (i-1)*10;
             Brain.Screen.printAt(1,30 + row, true, "%f", currentTime); 
