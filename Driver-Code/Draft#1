@@ -7,7 +7,6 @@
 */
 
 #include "robot-config.h"    
-#include "G:\Turning Point\Testers.vex"
     
 int countLift = 0;
 void liftConstant(){
@@ -43,8 +42,8 @@ void informationMotor2(){
 }
 
 int main() {
-    MainUser.ButtonY.pressed(liftConstant);
-    MainUser.ButtonUp.pressed(tallPole);
+    MainUser.ButtonY.pressed(liftConstant); 
+    MainUser.ButtonUp.pressed(tallPole); //these use the PID code in order to lift the lift to the desired height for either the tall pole or short pole
     MainUser.ButtonUp.pressed(shortPole);
     while(true){
         SecondUser.Screen.clearScreen();
@@ -96,10 +95,10 @@ int main() {
         
         //Conveyor Belt Control
         if(SecondUser.ButtonL1.pressing()){
-            ConveyorBelt.spin(vex::directionType::fwd,200,vex::velocityUnits::rpm);
+            ConveyorBelt.spin(vex::directionType::fwd,200,vex::velocityUnits::rpm); //this spins the conveyor belt that is used to bring balls to our flywheel to shoot at  the flags
         }
         else if(SecondUser.ButtonL2.pressing()){
-            ConveyorBelt.spin(vex::directionType::rev,200,vex::velocityUnits::rpm);
+            ConveyorBelt.spin(vex::directionType::rev,200,vex::velocityUnits::rpm); //this spins the conveyor belt backwards in case that a ball gets stuck inside of the bot
         }
         else{
             ConveyorBelt.stop(vex::brakeType::hold);
@@ -109,10 +108,10 @@ int main() {
         
         //Main User Claw Control 
         if(MainUser.ButtonR1.pressing()){
-            Claw.spin(vex::directionType::fwd,140,vex::velocityUnits::rpm);
+            Claw.spin(vex::directionType::fwd,140,vex::velocityUnits::rpm); //this rotates the claw clockwise
         }
         else if(MainUser.ButtonR2.pressing()){
-            Claw.spin(vex::directionType::rev,140,vex::velocityUnits::rpm);
+            Claw.spin(vex::directionType::rev,140,vex::velocityUnits::rpm); //this rotates the claw counter clockwise
         }
         else{
             Claw.stop(vex::brakeType::hold);
@@ -122,7 +121,7 @@ int main() {
         
         //Second User Claw Control
         if(SecondUser.ButtonR2.pressing()){
-            Claw.spin(vex::directionType::fwd,140,vex::velocityUnits::rpm);
+            Claw.spin(vex::directionType::fwd,140,vex::velocityUnits::rpm); //this allows the second user to control the claw
         }
         else{
             Claw.stop(vex::brakeType::hold);
@@ -131,7 +130,7 @@ int main() {
         
         
         //FLYWHEEL TESTER
-        if(SecondUser.ButtonR1.pressing()){
+        if(SecondUser.ButtonR1.pressing()){ //the flywheel spins only when the right bumper button is pressed to prevent the motor from burning out
             FlywheelTop.spin(vex::directionType::fwd,100, vex::velocityUnits::pct);
             FlywheelBot.spin(vex::directionType::fwd,100, vex::velocityUnits::pct);
         }
