@@ -11,16 +11,16 @@ void PIDChassis(double dist){
     RightChassis.resetRotation();
     LeftChassis.resetRotation();
     
-    double goal = (180*dist)/(2*M_PI);
+    double goal = (180*dist)/(2*M_PI); //this finds the "goal" or where the bot should be at the end.
     
     double pGain = 30.0;
     double iGain = 0.0;
     double dGain = 0.0;
     
-    double errorR = goal - RightChassis.rotation(vex::rotationUnits::deg);
+    double errorR = goal - RightChassis.rotation(vex::rotationUnits::deg); //these find out how off the bot is from its target on each side
     double errorL = goal - LeftChassis.rotation(vex::rotationUnits::deg);
     double errorSum = 0.0;
-    double oldError = RightChassis.rotation(vex::rotationUnits::deg);
+    double oldError = RightChassis.rotation(vex::rotationUnits::deg); 
     
     while(true){
         errorR = goal - RightChassis.rotation(vex::rotationUnits::deg);
@@ -31,9 +31,9 @@ void PIDChassis(double dist){
         }
         double avgError = ((errorR + errorL)/2);
         double change = avgError - oldError;
-        double difference = RightChassis.rotation(vex::rotationUnits::deg) - LeftChassis.rotation(vex::rotationUnits::deg);
+        double difference = RightChassis.rotation(vex::rotationUnits::deg) - LeftChassis.rotation(vex::rotationUnits::deg); //determines how far off one side is from the other. This isn't used and is reduntant code.
         double motorSpeed = (avgError*pGain) + (errorSum*iGain) + (change*dGain);
-        RightChassis.spin(vex::directionType::fwd, motorSpeed, vex::velocityUnits::dps);
+        RightChassis.spin(vex::directionType::fwd, motorSpeed, vex::velocityUnits::dps); //this tries to adjust the bot to reach the target
         LeftChassis.spin(vex::directionType::fwd, motorSpeed+ difference,vex::velocityUnits::dps);
         
         oldError = avgError;
@@ -43,5 +43,5 @@ void PIDChassis(double dist){
     RightChassis.stop(vex::brakeType::brake);
     
     RightChassis.resetRotation();
-    LeftChassis.resetRotation();
+    LeftChassis.resetRotation(); //sets the encoder values to zero
 }
