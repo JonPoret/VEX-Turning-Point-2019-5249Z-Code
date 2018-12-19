@@ -5,7 +5,7 @@
  *Changes- This is the first draft
 */
 void PIDChassis(double dist){
-    RightChassis.resetRotation();
+    RightChassis.resetRotation(); //sets the encoder value of the motors to zero
     LeftChassis.resetRotation();
     
     double goal = (180*dist)/(2*M_PI);
@@ -20,13 +20,13 @@ void PIDChassis(double dist){
     double oldError = RightChassis.rotation(vex::rotationUnits::deg);
     
     while(true){
-        error = goal - RightChassis.rotation(vex::rotationUnits::deg);
+        error = goal - RightChassis.rotation(vex::rotationUnits::deg); //finds the current displacement of the bot in terms of its target, and defines it as error.
         errorSum += error;
         if(error == 0.0 || error < goal){
             errorSum = 0.0;
         }
         double change = error - oldError;
-        double motorSpeed = (error*pGain) + (errorSum*iGain) + (change*dGain);
+        double motorSpeed = (error*pGain) + (errorSum*iGain) + (change*dGain); //This finds the speed the motor has to rotate at in order for the bot to reach its target in a certain period pf time.
         RightChassis.spin(vex::directionType::fwd, motorSpeed, vex::velocityUnits::dps);
         LeftChassis.spin(vex::directionType::fwd, motorSpeed,vex::velocityUnits::dps);
         
