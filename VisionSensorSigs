@@ -1,0 +1,7 @@
+vex::brain Brain;
+vex::vision::signature REDFLAGNEW (1, 4681, 6773, 5727, -593, -215, -404, 3, 0);
+vex::vision::signature BLUEFLAGNEW (2, -2657, -1095, -1876, 1455, 6951, 4203, 1.1, 0);
+vex::vision::signature BALLNEW (3, -245, 1097, 426, -3661, -1047, -2354, 1.2, 0);
+vex::vision Vision (vex::PORT4, 98, REDFLAGNEW, BLUEFLAGNEW, BALLNEW);
+
+//these may not be oerfect, but it should work
